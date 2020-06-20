@@ -28,6 +28,7 @@ async function main() {
       type: "list",
       choices: [
         "View all employees",
+        "View employees by manager",
         "View all departments",
         "View all roles",
         "View total utilized budget",
@@ -163,8 +164,14 @@ async function main() {
       }
       break;
     case "View total utilized budget":
-      const [budget] = await query.viewTotalUtilizedBudget();
+      const [budget] = await query.getTotalUtilizedBudget();
       console.log(`Total utilized budget: $${budget["SUM(salary)"]}`);
+      break;
+    case "View employees by manager":
+      const existingManagers = await query.getAllEmployees();
+      const existingManager = await prompts.inquireExistingEmployee(inquirer,existingManagers);
+      const employeesWithManager = await query.getEmployeesByManager(existingManager);
+      console.table(employeesWithManager);
       break;
     case "Exit":
       connection.end();

@@ -27,10 +27,17 @@ const updateRoleQuery = `UPDATE role SET ? WHERE id = ?`
 const deleteEmployeeQuery = `DELETE FROM employee WHERE id = ?`;
 const deleteDepartmentQuery = `DELETE FROM department WHERE id = ?`;
 const deleteRoleQuery = `DELETE FROM role WHERE id = ?`;
-const viewTotalUtilizedBudgetQuery = `
+const getTotalUtilizedBudgetQuery = `
 SELECT SUM(salary) FROM employee 
 INNER JOIN role
 ON role.id = employee.role_id;`;
+const getEmployeesByManagerQuery = `
+SELECT emp.id as 'ID', emp.first_name as 'First Name', emp.last_name as 'Last Name', role.id as 'Role ID', role.title as 'Role', mgr.id as 'Manager ID', mgr.first_name as 'Manager First Name',mgr.last_name as 'Manager Last Name' FROM employee emp
+LEFT JOIN employee mgr
+ON emp.manager_id = mgr.id
+INNER JOIN role 
+ON emp.role_id = role.id 
+WHERE emp.manager_id = ?`
 
 // external functions
 Query.prototype.getAllEmployees = async function () {
@@ -45,8 +52,12 @@ Query.prototype.getAllRoles = async function () {
   return await this.connection.query(getAllRolesQuery);
 }
 
-Query.prototype.viewTotalUtilizedBudget = async function() {
-  return await this.connection.query(viewTotalUtilizedBudgetQuery);
+Query.prototype.getEmployeesByManager = async function(manager) {
+  return await this.connection.query(getEmployeesByManagerQuery,[manager.ID]);
+}
+
+Query.prototype.getTotalUtilizedBudget = async function() {
+  return await this.connection.query(getTotalUtilizedBudgetQuery);
 }
 
 Query.prototype.addEmployee = async function (employee) {

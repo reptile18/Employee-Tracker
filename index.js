@@ -200,6 +200,11 @@ function emptyRole() {
 }
 
 async function printTitle() {
-  // to do: print jumbotron 
-  console.log("Employee Manager");
+  console.log(`
+  EEEEE  M   M  PPPP  L      OOO  Y   Y  EEEEE  EEEEE     M   M    A    N   N    A     GGG   EEEEE  RRRR
+  E      MM MM  P   P L     O   O  Y Y   E      E         MM MM   A A   NN  N   A A   G   G  E      R   R
+  EEEEE  M M M  PPPP  L     O   O   Y    EEEEE  EEEEE     M M M  A   A  N N N  A   A  G      EEEEE  RRRR
+  E      M   M  P     L     O   O   Y    E      E         M   M  A A A  N  NN  A A A  G GGG  E      R R
+  EEEEE  M   M  P     LLLLL  OOO    Y    EEEEE  EEEEE     M   M  A   A  N   N  A   A   GGG   EEEEE  R  RR
+  `);
 }

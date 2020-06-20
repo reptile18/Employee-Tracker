@@ -154,6 +154,9 @@ Query.prototype.deleteRole = async function(role) {
 Query.prototype.printErrorMessageForCode = function (error) {
   console.log("\x1b[31m");
   switch (error.errno) {
+    case 1406:
+      console.log("Data provided is too long for the column.");
+      break;
     case 1451:
       console.log("Can't delete or update. Existing data references this object.");
       break;

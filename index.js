@@ -62,7 +62,6 @@ async function main() {
       const managers = await query.getAllEmployees();
 
       const employee = await prompts.inquireEmployee(inquirer,employeeroles,managers,emptyEmployee());
-      //console.log(employee);
       if (await query.addEmployee(employee)) {
         console.log(`Employee ${employee.first_name} ${employee.last_name} added successfully.`)
       }
@@ -72,7 +71,6 @@ async function main() {
       break;
     case "Add department":
       const department = await prompts.inquireDepartment(inquirer,emptyDepartment());
-      console.log(department);
       if (await query.addDepartment(department)) {
         console.log(`Department ${department.name} added successfully.`)
       }

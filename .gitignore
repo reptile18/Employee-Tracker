@@ -1,0 +1,5 @@
+node_modules/
+package-lock.json
+instructions.md
+Assets/employee-tracker.gif
+Assets/schema.png

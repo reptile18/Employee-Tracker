@@ -16,19 +16,19 @@ async function inquireDepartment(ask,defaults) {
 
 async function inquireRole(ask,departments,defaults) {
   const departmentChoices = inquirefyDepartments(departments);
-  const defaultDepartmentIndex = idToIndex(departments,defaults["department_id"]);
+  const defaultDepartmentIndex = idToIndex(departments,defaults["Department ID"]);
   const roleResponse = await ask.prompt([
     {
       message: "Enter role's title: ",
       name: "title",
       type: "input",
-      default: defaults.title
+      default: defaults["Title"]
     },
     {
       message: "Enter role's salary: ",
       name: "salary",
       type: "input",
-      default: defaults.salary
+      default: defaults["Salary"]
     },
     {
       message: "Select role's department: ",
@@ -47,13 +47,13 @@ async function inquireEmployee(ask,roles,managers,defaults) {
   const managerChoices = inquirefyEmployees(managers);
 
   let default_role_index;
-  if (defaults["role_id"]) {
-    default_role_index = idToIndex(roles,defaults["role_id"]);
+  if (defaults["Role ID"]) {
+    default_role_index = idToIndex(roles,defaults["Role ID"]);
   }
   
   let default_manager_index;
-  if (defaults["manager_id"]) {
-    default_manager_index = idToIndex(managers,defaults["manager_id"]);
+  if (defaults["Manager ID"]) {
+    default_manager_index = idToIndex(managers,defaults["Manager ID"]);
   }
 
   const employeeResponse = await ask.prompt([
@@ -61,13 +61,13 @@ async function inquireEmployee(ask,roles,managers,defaults) {
       message: "Enter employee's first name: ",
       name: "firstName",
       type: "input",
-      default: defaults['first_name']
+      default: defaults['First Name']
     },
     {
       message: "Enter employee's last name: ",
       name: "lastName",
       type: "input",
-      default: defaults['last_name']
+      default: defaults['Last Name']
     },
     {
       message: "Select employee's role: ",
@@ -87,7 +87,7 @@ async function inquireEmployee(ask,roles,managers,defaults) {
   return new Employee(employeeResponse.firstName,employeeResponse.lastName,employeeResponse.roleID,employeeResponse.managerID);
 }
 
-async function inquireExistingEmployee(ask,employees,employeesRaw) {
+async function inquireExistingEmployee(ask,employees) {
   const employeeChoices = inquirefyEmployees(employees);
   const {existingEmployeeID} = await ask.prompt([
     {
@@ -97,7 +97,7 @@ async function inquireExistingEmployee(ask,employees,employeesRaw) {
       choices: employeeChoices
     }
   ]);
-  const [existingEmployee] = employeesRaw.filter(value => value.id === existingEmployeeID);
+  const [existingEmployee] = employees.filter(value => value.ID === existingEmployeeID);
   return existingEmployee;
 }
 
@@ -114,7 +114,7 @@ async function inquireExistingDepartment(ask,departments) {
   return departments[idToIndex(departments,parseInt(existingDepartmentID))];
 }
 
-async function inquireExistingRole(ask,roles,rolesRaw) {
+async function inquireExistingRole(ask,roles) {
   const roleChoices = inquirefyRoles(roles);
   const {existingRoleID} = await ask.prompt([
     {
@@ -124,7 +124,7 @@ async function inquireExistingRole(ask,roles,rolesRaw) {
       choices: roleChoices
     }
   ]);
-  const [existingRole] = rolesRaw.filter(value => value.id === existingRoleID);
+  const [existingRole] = roles.filter(value => value.ID === existingRoleID);
   return existingRole;
 }
 

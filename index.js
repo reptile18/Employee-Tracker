@@ -92,13 +92,13 @@ async function main() {
       break;
     case "Update employee":
       const existingEmployees = await query.getAllEmployees();
-      const existingEmployeesRaw = await query.getAllEmployeesRaw();
-      const existingEmployee = await prompts.inquireExistingEmployee(inquirer,existingEmployees,existingEmployeesRaw);
-
+      const existingEmployee = await prompts.inquireExistingEmployee(inquirer,existingEmployees);
       const existingEmployeeRoles = await query.getAllRoles();
       const existingEmployeeManagers = await query.getAllEmployees();
       const updatedEmployee = await prompts.inquireEmployee(inquirer,existingEmployeeRoles,existingEmployeeManagers,existingEmployee);
-      updatedEmployee.id = existingEmployee.id;
+      updatedEmployee.id = existingEmployee.ID;
+      console.log(existingEmployee);
+      console.log(updatedEmployee);
       if (await query.updateEmployee(updatedEmployee)) {
         console.log(`Employee ${updatedEmployee.first_name} ${updatedEmployee.last_name} update successfully`);
       }
@@ -121,11 +121,10 @@ async function main() {
       break;
     case "Update role":
       const existingRoles = await query.getAllRoles();
-      const existingRolesRaw = await query.getAllRolesRaw();
-      const existingRole = await prompts.inquireExistingRole(inquirer,existingRoles,existingRolesRaw);
+      const existingRole = await prompts.inquireExistingRole(inquirer,existingRoles);
       const existingRoleDepartments = await query.getAllDepartments();
       const updatedRole = await prompts.inquireRole(inquirer,existingRoleDepartments,existingRole);
-      updatedRole.id = existingRole.id;
+      updatedRole.id = existingRole.ID;
       if (await query.updateRole(updatedRole)) {
         console.log(`Role ${updatedRole.title} successfully updated`);
       }
@@ -135,10 +134,34 @@ async function main() {
 
       break;
     case "Delete employee":
+      const existingEmployeesToDelete = await query.getAllEmployees();
+      const existingEmployeeToDelete = await prompts.inquireExistingEmployee(inquirer,existingEmployeesToDelete);
+      if (await query.deleteEmployee(existingEmployeeToDelete)) {
+        console.log(`Employee ${existingEmployeeToDelete["First Name"]} ${existingEmployeeToDelete["Last Name"]} deleted.`)
+      }
+      else {
+        console.log("Employee deletion failed");
+      }
       break;
     case "Delete department":
+      const existingDepartmentsToDelete = await query.getAllDepartments();
+      const existingDepartmentToDelete = await prompts.inquireExistingDepartment(inquirer,existingDepartmentsToDelete);
+      if (await query.deleteDepartment(existingDepartmentToDelete)) {
+        console.log(`Department ${existingDepartmentToDelete["Name"]} deleted.`);
+      }
+      else {
+        console.log("Department deletion failed");
+      }
       break;
     case "Delete role":
+      const existingRolesToDelete = await query.getAllRoles();
+      const existingRoleToDelete = await prompts.inquireExistingRole(inquirer,existingRolesToDelete);
+      if (await query.deleteRole(existingRoleToDelete)) {
+        console.log(`Role ${existingRoleToDelete["Title"]} deleted`);
+      }
+      else {
+        console.log("Role deletion failed");
+      }
       break;
     case "Exit":
       connection.end();

@@ -36,6 +36,9 @@ async function main() {
         "Update employee",
         "Update department",
         "Update role",
+        "Delete employee",
+        "Delete department",
+        "Delete role",
         "Exit"
       ]
     }
@@ -47,7 +50,7 @@ async function main() {
       console.table(employees);
       break;
     case "View all departments":
-      const departments = await query.getAllDepartments(connction);
+      const departments = await query.getAllDepartments();
       console.table(departments);
       break;
     case "View all roles":
@@ -79,7 +82,7 @@ async function main() {
       break;
     case "Add role":
       const roleDepartments = await query.getAllDepartments();
-      const role = await prompts.inquireRole(inquirer,roleDepartments)
+      const role = await prompts.inquireRole(inquirer,roleDepartments,emptyRole)
       if (await query.addRole(role)) {
         console.log(`Role ${role.title} added successfully.`)
       }
@@ -131,6 +134,12 @@ async function main() {
       }
 
       break;
+    case "Delete employee":
+      break;
+    case "Delete department":
+      break;
+    case "Delete role":
+      break;
     case "Exit":
       connection.end();
       break;
@@ -145,11 +154,15 @@ async function main() {
 }
 
 function emptyEmployee() {
-  return {'id': null,'first_name': "",'last_name': "","role_id": 0,"manager_id": 0};
+  return {'id': null,'first_name': null,'last_name': null,"role_id": null,"manager_id": null};
 }
 
 function emptyDepartment() {
-  return {'ID': null,"Name": ""};
+  return {'ID': null,"Name": null};
+}
+
+function emptyRole() {
+  return {"id": null, "title": null, "salary": null, "department_id": null};
 }
 
 async function printTitle() {

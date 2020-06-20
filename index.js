@@ -30,6 +30,7 @@ async function main() {
         "View all employees",
         "View all departments",
         "View all roles",
+        "View total utilized budget",
         "Add employee",
         "Add department",
         "Add role",
@@ -161,8 +162,13 @@ async function main() {
         console.log("Role deletion failed");
       }
       break;
+    case "View total utilized budget":
+      const [budget] = await query.viewTotalUtilizedBudget();
+      console.log(`Total utilized budget: $${budget["SUM(salary)"]}`);
+      break;
     case "Exit":
       connection.end();
+      return;
       break;
   }
   await inquirer.prompt([

@@ -23,17 +23,13 @@ npm install
 to install all dependencies
 
 ### Back End
-On a MySQL Server, create the schema and tables using the MySQL script [installation.sql](./installation.sql)
+On a MySQL Server, create the schema and tables using the MySQL script [installation.sql](./database_files/installation.sql)
 
 ## Launch
 
 To start the express server, type:
 ```
-npm start
-```
-or
-```
-node ./server.js
+node ./index.js
 ```
 
 ## Usage
@@ -57,7 +53,7 @@ This project is a lightweight employee manager that prompts the user for actions
 View the provided video above for more information on each of these actions.
 
 ## Testing 
-For a set of test objects to start with, run [employees_seed.sql](./employees_seed.sql)
+For a set of test objects to start with, run [employees_seed.sql](./database_files/employees_seed.sql)
 
 ## Author
 

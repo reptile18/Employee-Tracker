@@ -29,6 +29,10 @@ On a MySQL Server, create the schema and tables using the MySQL script [installa
 
 To start the express server, type:
 ```
+npm start
+```
+or
+```
 node ./index.js
 ```
 

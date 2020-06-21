@@ -97,8 +97,6 @@ async function main() {
       const existingEmployeeManagers = await query.getAllEmployees();
       const updatedEmployee = await prompts.inquireEmployee(inquirer,existingEmployeeRoles,existingEmployeeManagers,existingEmployee);
       updatedEmployee.id = existingEmployee.ID;
-      console.log(existingEmployee);
-      console.log(updatedEmployee);
       if (await query.updateEmployee(updatedEmployee)) {
         console.log(`Employee ${updatedEmployee.first_name} ${updatedEmployee.last_name} update successfully`);
       }
@@ -175,7 +173,7 @@ async function main() {
       break;
     case "Exit":
       connection.end();
-      return;
+      process.exit(0);
       break;
   }
   await inquirer.prompt([

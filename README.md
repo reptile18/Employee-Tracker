@@ -10,6 +10,7 @@
     - [Back End](#back-end)
   - [Launch](#launch)
   - [Usage](#usage)
+  - [Testing](#testing)
   - [Author](#author)
 
 ## Installation
@@ -22,10 +23,7 @@ npm install
 to install all dependencies
 
 ### Back End
-On a MySQL Server, create the schema and tables using the MySQL script
-```
-installation.sql
-```
+On a MySQL Server, create the schema and tables using the MySQL script [installation.sql](./installation.sql)
 
 ## Launch
 
@@ -57,6 +55,9 @@ This project is a lightweight employee manager that prompts the user for actions
 * Delete role
 
 View the provided video above for more information on each of these actions.
+
+## Testing 
+For a set of test objects to start with, run [employees_seed.sql](./employees_seed.sql)
 
 ## Author
 

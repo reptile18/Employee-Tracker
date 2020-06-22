@@ -1,6 +1,6 @@
 # Employee Tracker
 
-![Employee Tracker GIF Walkthrough](test.gif)
+[![Employee Tracker GIF Walkthrough](./Assets/walkthroughvideo.png)](https://youtu.be/CjLUijGpU4s)
 
 ## Table of Contents
 - [Employee Tracker](#employee-tracker)

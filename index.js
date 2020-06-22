@@ -98,7 +98,7 @@ async function main() {
       const updatedEmployee = await prompts.inquireEmployee(inquirer,existingEmployeeRoles,existingEmployeeManagers,existingEmployee);
       updatedEmployee.id = existingEmployee.ID;
       if (await query.updateEmployee(updatedEmployee)) {
-        console.log(`Employee ${updatedEmployee.first_name} ${updatedEmployee.last_name} update successfully`);
+        console.log(`Employee ${updatedEmployee.first_name} ${updatedEmployee.last_name} updated successfully`);
       }
       else {
         console.log("Employee update failed.");
